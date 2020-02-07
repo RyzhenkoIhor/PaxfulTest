@@ -4,18 +4,18 @@ import { Navbar } from "components/Navbar";
 import { Tabs } from "components/Tabs";
 import TradesScreen from "pages/Trades";
 import {
-  root,
-  buyBTC,
-  sellBTC,
-  account,
-  wallet,
-  support,
-  overview,
-  trades,
-  disputes,
-  offers,
-  team,
-  tradeHistory
+  ROOT,
+  BUY_BTC,
+  SELL_BTC,
+  ACCOUNT,
+  WALLET,
+  SUPPORT,
+  OVERVIEW,
+  TRADES,
+  DISPUTES,
+  OFFERS,
+  TEAM,
+  TRADE_HISTORY
 } from "./routes";
 
 const Router: React.FC = () => {
@@ -24,27 +24,27 @@ const Router: React.FC = () => {
       <Navbar />
       <div className="container">
         <Switch>
-          <Route path={root} exact />
-          <Route path={buyBTC} />
-          <Route path={`${sellBTC}`}>
+          <Route path={ROOT} exact />
+          <Route path={BUY_BTC} />
+          <Route path={`${SELL_BTC}`}>
             <Tabs />
             <Switch>
-              <Route path={`${sellBTC}${overview}`} />
+              <Route path={`${SELL_BTC}${OVERVIEW}`} />
               <Route
                 component={TradesScreen}
                 exact
-                path={`${sellBTC}${trades}/:chatId`}
+                path={`${SELL_BTC}${TRADES}/:chatId`}
               />
-              <Route component={TradesScreen} path={`${sellBTC}${trades}`} />
-              <Route path={`${sellBTC}${disputes}`} />
-              <Route path={`${sellBTC}${offers}`} />
-              <Route path={`${sellBTC}${team}`} />
-              <Route path={`${sellBTC}${tradeHistory}`} />
+              <Route component={TradesScreen} path={`${SELL_BTC}${TRADES}`} />
+              <Route path={`${SELL_BTC}${DISPUTES}`} />
+              <Route path={`${SELL_BTC}${OFFERS}`} />
+              <Route path={`${SELL_BTC}${TEAM}`} />
+              <Route path={`${SELL_BTC}${TRADE_HISTORY}`} />
             </Switch>
           </Route>
-          <Route path={account} />
-          <Route path={wallet} />
-          <Route path={support} />
+          <Route path={ACCOUNT} />
+          <Route path={WALLET} />
+          <Route path={SUPPORT} />
         </Switch>
       </div>
     </BrowserRouter>

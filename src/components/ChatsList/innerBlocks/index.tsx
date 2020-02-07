@@ -3,7 +3,7 @@ import React from "react";
 import { UserAvatar } from "ui";
 import { ChatType } from "types/Chats";
 
-import { sellBTC, trades } from "router/routes";
+import { SELL_BTC, TRADES } from "router/routes";
 
 import {
   ChatCardWrapper,
@@ -22,7 +22,7 @@ interface Props {
 }
 
 export const ChatCard = ({ data, currency }: Props) => (
-  <ChatCardWrapper to={`${sellBTC}${trades}/${data.id}`}>
+  <ChatCardWrapper to={`${SELL_BTC}${TRADES}/${data.id}`}>
     <CardBody>
       <CardHeader>
         <IndicateDot isUnread={data.isUnread} />
