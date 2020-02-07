@@ -1,11 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { RootStore } from "store/reducers";
 import { releaseBTC, switchUser } from "store/actions";
 
 import { CurrencyType } from "types/Currency";
-import { ChatType } from "types/Chat";
+import { ChatType } from "types/Chats";
 import { UserType } from "types/User";
 
 import { UserAvatar } from "ui";
@@ -18,15 +17,9 @@ import {
   ColoredSpan
 } from "./styles";
 
-interface MapStateToProps {
-  chat: ChatType[];
-  user: UserType;
-  currency: CurrencyType;
-}
-
 interface Props {
   chatId: number;
-  chat: ChatType[];
+  chats: ChatType[];
   user: UserType;
   onReleaseBTC: (chatId: number) => void;
   onSwitchUser: (id: number) => void;
@@ -34,9 +27,9 @@ interface Props {
 }
 
 const ChatDetails = (props: Props) => {
-  const { chat, chatId, onReleaseBTC, user, onSwitchUser, currency } = props;
+  const { chats, chatId, onReleaseBTC, user, onSwitchUser, currency } = props;
 
-  const currentChat = chat[chatId];
+  const currentChat = chats[chatId];
 
   const handleReleaseBTC = () => {
     onReleaseBTC(chatId);
@@ -64,7 +57,7 @@ const ChatDetails = (props: Props) => {
         </div>
         <div>
           <span># of trades</span>
-          <ColoredSpan>{chat.length}</ColoredSpan>
+          <ColoredSpan>{chats.length}</ColoredSpan>
         </div>
         <div>
           <span>trade status</span>
@@ -82,7 +75,7 @@ const ChatDetails = (props: Props) => {
         </div>
         <div>
           <span>Amount BTC</span>
-          <span>{currentChat.amountUSD/currency.currency}</span>
+          <span>{currentChat.amountUSD / currency.currency}</span>
         </div>
       </Details>
       <Button onClick={handleUserSwitch}>Switch User</Button>
@@ -90,11 +83,7 @@ const ChatDetails = (props: Props) => {
   );
 };
 
-function mapStateToProps(state: RootStore): MapStateToProps {
-  return { chat: state.chat, user: state.user, currency: state.currency };
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   { onReleaseBTC: releaseBTC, onSwitchUser: switchUser }
 )(ChatDetails);

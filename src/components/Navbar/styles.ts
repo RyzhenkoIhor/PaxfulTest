@@ -13,6 +13,7 @@ export const HeaderWrapper = styled.header`
   }
   @media (max-width: 568px) {
     height: 100px;
+    flex-direction: column;
   }
 `;
 
@@ -22,6 +23,9 @@ export const Logo = styled.div`
   @media (max-width: 768px) {
     font-size: 24px;
   }
+  @media (max-width: 568px) {
+    margin-top: 5px;
+  }
 `;
 
 export const NavWrapper = styled.nav`
@@ -30,12 +34,21 @@ export const NavWrapper = styled.nav`
     font-size: 14px;
     text-decoration: none;
     color: #fff;
-    margin: 10px 0;
+    cursor: pointer;
+    padding: 10px;
     &.active {
       text-decoration: underline;
     }
   }
   @media (max-width: 568px) {
-     display: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    & > a {
+      flex-grow: 1;
+      width: 50%;
+      justify-content: center;
+    }
   }
 `;

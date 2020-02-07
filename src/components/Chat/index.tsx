@@ -1,10 +1,8 @@
 import React, { useEffect, createRef } from "react";
 import { connect } from "react-redux";
 
-import { ChatType, MessageType } from "types/Chat";
+import { ChatType, MessageType } from "types/Chats";
 import { UserType } from "types/User";
-
-import { RootStore } from "store/reducers";
 import { deleteChat, sendMessage, readMessages } from "store/actions";
 
 import {
@@ -22,14 +20,9 @@ import {
   SendButton
 } from "./styles";
 
-interface MapStateToProps {
-  chat: ChatType[];
-  user: UserType;
-}
-
 interface Props {
   chatId: number;
-  chat: ChatType[];
+  chats: ChatType[];
   onChatDelete: (chatId: number) => void;
   onMessageSend: (chatId: number, message: MessageType) => void;
   onReadMessage: (chatId: number, userId: number) => void;
@@ -38,7 +31,7 @@ interface Props {
 
 const Chat = (props: Props) => {
   const {
-    chat,
+    chats,
     onChatDelete,
     onMessageSend,
     chatId,
@@ -49,23 +42,25 @@ const Chat = (props: Props) => {
   const messagesEndRef = createRef<HTMLDivElement>();
 
   const scrollToBottom = () => {
-    messagesEndRef.current!.scrollTo({
-      top: messagesEndRef.current!.scrollHeight,
+    messagesEndRef.current?.scrollTo({
+      top: messagesEndRef.current?.scrollHeight,
       behavior: "smooth"
     });
   };
 
   useEffect(
     () => {
-      inputRef.current!.value = "";
-      messagesEndRef.current!.scrollTo({
-        top: messagesEndRef.current!.scrollHeight
+      if(inputRef && inputRef.current){
+        inputRef.current.value = "";
+      }
+      messagesEndRef.current?.scrollTo({
+        top: messagesEndRef.current?.scrollHeight
       });
     },
     [messagesEndRef, chatId, inputRef]
   );
 
-  const currentChat = chat[chatId];
+  const currentChat = chats[chatId];
   useEffect(
     () => {
       onReadMessage(currentChat.id, user.id);
@@ -76,11 +71,13 @@ const Chat = (props: Props) => {
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onMessageSend(chatId, {
-      text: inputRef.current!.value,
+      text: inputRef.current?.value || '',
       timestamp: Date.now(),
       senderId: user.id
     });
-    inputRef.current!.value = "";
+    if(inputRef && inputRef.current){
+      inputRef.current.value = "";
+    }
     scrollToBottom();
   };
 
@@ -130,12 +127,8 @@ const Chat = (props: Props) => {
   );
 };
 
-function mapStateToProps(state: RootStore): MapStateToProps {
-  return { chat: state.chat, user: state.user };
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   {
     onChatDelete: deleteChat,
     onMessageSend: sendMessage,

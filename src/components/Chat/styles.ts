@@ -21,7 +21,7 @@ export const ChatWrapper = styled.div`
   justify-content: space-between;
   background-color: ${blueBg};
   box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.15);
-    @media (max-width: 768px) {
+  @media (max-width: 768px) {
     min-height: 50vh;
   }
 `;

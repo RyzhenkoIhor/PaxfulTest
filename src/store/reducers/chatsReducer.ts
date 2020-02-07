@@ -5,34 +5,13 @@ import {
   SEND_MESSAGE,
   SWITCH_USER
 } from "../actions/types";
-import { ChatListItemType } from "types/Chats";
-
-const generatedState = () => {
-  const result = [];
-  for (let i = 0; i < 5; i++) {
-    result.push({
-      id: i,
-      sellerId: 1,
-      sellerName: "Aron",
-      sellerAvatarUrl:
-        "https://i1.wp.com/lccbrevard.org/wp-content/uploads/2018/12/Empty-Profile-Photo.png?fit=300%2C300&ssl=1",
-      paymentMethod: i % 2 ? "PayPal" : "Amazon Gift Card",
-      amountUSD: 15 * i + 1,
-      isUnread: !!(i % 2),
-      isPayed: !(i % 2),
-      dirtyBy: null,
-      readBy: null,
-      amountBTC: 0,
-      currency: 0,
-    });
-  }
-  return result;
-};
+import { ChatType } from "types/Chats";
+import { generatedState } from "./initStateGenerators/chatsStateGenerator";
 
 const initialState = generatedState();
 
 export default function(
-  state: ChatListItemType[] = initialState,
+  state: ChatType[] = initialState,
   action: { type: string; payload?: any }
 ) {
   switch (action.type) {
@@ -60,6 +39,7 @@ export default function(
         if (chat.id === action.payload.id) {
           return {
             ...chat,
+            messages: [...chat.messages, action.payload.message],
             dirtyBy: action.payload.message.senderId
           };
         }
