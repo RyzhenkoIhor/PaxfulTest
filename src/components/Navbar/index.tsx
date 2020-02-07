@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, NavLink} from "react-router-dom";
+import { NavLink} from "react-router-dom";
 
 import { ROOT, BUY_BTC, SELL_BTC, ACCOUNT, SUPPORT, WALLET } from "router/routes";
 
@@ -13,7 +13,7 @@ export const Navbar: React.FC = () => (
       <NavLink to={SELL_BTC}>Sell bitcoins</NavLink>
       <NavLink to={WALLET}>Wallet</NavLink>
       <NavLink to={SUPPORT}>Support</NavLink>
-      <NavLink to={ACCOUNT}>Your ACCOUNT</NavLink>
+      <NavLink to={ACCOUNT}>Your account</NavLink>
     </NavWrapper>
   </HeaderWrapper>
 );
