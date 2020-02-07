@@ -1,0 +1,12 @@
+export const root = "/";
+export const buyBTC = "/buy-bitcoints";
+export const sellBTC = "/sell-bitcoints";
+export const wallet = "/wallet";
+export const support = "/support";
+export const account = "/my-account";
+export const overview = "/overview";
+export const trades = "/trades";
+export const disputes = "/disputes";
+export const offers = "/offers";
+export const team = "/team";
+export const tradeHistory = "/history";
